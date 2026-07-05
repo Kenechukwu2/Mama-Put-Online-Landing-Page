@@ -1,0 +1,17 @@
+set -e
+cd /mnt/data/mamaputonline/assets
+curl -L --fail -o egusi-soup.jpg 'https://upload.wikimedia.org/wikipedia/commons/8/89/Egusi_soup_in_a_plate.jpg'
+curl -L --fail -o ewedu-soup.jpg 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Amala_and_Gbegiri_with_Ewedu_soup.jpg'
+curl -L --fail -o ora-soup.jpg 'https://upload.wikimedia.org/wikipedia/commons/b/b9/%E1%BB%8Cha_soup.jpg'
+curl -L --fail -o edikaikong-soup.jpg 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Edikaikong_soup.JPG'
+curl -L --fail -o okazi-soup.jpg 'https://upload.wikimedia.org/wikipedia/commons/9/96/A_friend_from_Baku_eating_a_nigerian_local_meal_wheat_flour_and_okazi_soup_with_mixed_meat.jpg'
+curl -L --fail -o ogbono-soup.jpg 'https://upload.wikimedia.org/wikipedia/commons/d/de/Ogbono_soup_20th_April.jpg'
+curl -L --fail -o okro-soup.jpg 'https://upload.wikimedia.org/wikipedia/commons/c/cf/Nigerian_Okro_Soup.jpg'
+curl -L --fail -o fried-rice.jpg 'https://upload.wikimedia.org/wikipedia/commons/7/7e/Plates_of_Jollof_Rice%2C_Fried_Rice_and_Chicken.jpg'
+curl -L --fail -o yam-porridge.jpg 'https://upload.wikimedia.org/wikipedia/commons/5/5d/Yam_pottage_or_%C3%80s%C3%A1r%C3%B3.jpg'
+curl -L --fail -o beans-porridge.jpg 'https://upload.wikimedia.org/wikipedia/commons/d/dd/Beans_porridge_and_fried_plantains.jpg'
+curl -L --fail -o fried-plantain.jpg 'https://upload.wikimedia.org/wikipedia/commons/2/20/Fried_plantain.jpg'
+curl -L --fail -o abacha.jpg 'https://upload.wikimedia.org/wikipedia/commons/f/f1/Image_of_Abacha_known_as_African_salad.jpg'
+curl -L --fail -o nkwobi.jpg 'https://upload.wikimedia.org/wikipedia/commons/0/07/Nkwobi_delicacy.jpg'
+curl -L --fail -o fried-chicken.jpg 'https://upload.wikimedia.org/wikipedia/commons/7/7e/Jollof_rice_and_fried_chicken.jpg'
+curl -L --fail -o kpomo.jpg 'https://upload.wikimedia.org/wikipedia/commons/5/54/Image_of_peppered_kpomo.jpg'

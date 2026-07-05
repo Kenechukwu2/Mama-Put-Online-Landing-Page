@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MamaPutOnline | Nigerian Cooked Meals Delivered</title>
+
+  <!--
+    ENSG AI CLASS - Assignment 1
+    Landing Page: MamaPutOnline
+    Stack: HTML + CSS + small JavaScript
+    Colour direction: blue, white and purple
+    Requirement covered: sticky menu, sticky footer, hero, side panel, product cards, visible prompts, comments in code.
+  -->
+
+  <style>
+    :root {
+      --blue-950: #08164d;
+      --blue-900: #0f2368;
+      --blue-700: #1d4ed8;
+      --blue-600: #2563eb;
+      --purple-700: #6d28d9;
+      --purple-600: #7c3aed;
+      --purple-100: #ede9fe;
+      --white: #ffffff;
+      --slate-950: #0f172a;
+      --slate-700: #334155;
+      --slate-500: #64748b;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --green-700: #15803d;
+      --shadow: 0 18px 40px rgba(8, 22, 77, 0.16);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--slate-950);
+      background: linear-gradient(180deg, #f8fbff 0%, #eef2ff 45%, #ffffff 100%);
+      line-height: 1.6;
+      padding-bottom: 92px; /* Keeps the fixed footer from covering page content. */
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    /* VIBE PROMPT: Menu Section
+       Create a sticky, clean top navigation bar for a Nigerian food landing page.
+       Use a blue-purple gradient, put the MamaPutOnline logo on the left,
+       add menu items in the middle, and place a visible search field on the right.
+    */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: linear-gradient(90deg, var(--blue-950), var(--blue-700), var(--purple-700));
+      color: var(--white);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 12px 30px rgba(8, 22, 77, 0.28);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      min-height: 74px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 225px;
+    }
+
+    .logo-mark {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: var(--white);
+      color: var(--blue-900);
+      font-weight: 900;
+      letter-spacing: -1px;
+      box-shadow: 0 12px 22px rgba(0, 0, 0, 0.18);
+    }
+
+    .brand h1 {
+      font-size: 1.12rem;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    .brand small {
+      display: block;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.72rem;
+      margin-top: 2px;
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .menu a {
+      padding: 10px 13px;
+      border-radius: 999px;
+      font-size: 0.94rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.9);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .menu a:hover {
+      background: rgba(255, 255, 255, 0.14);
+      transform: translateY(-1px);
+    }
+
+    .search-box {
+      width: 270px;
+      position: relative;
+    }
+
+    .search-box label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+
+    .search-box input {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.14);
+      color: var(--white);
+      outline: none;
+      border-radius: 999px;
+      padding: 13px 16px;
+      font-weight: 700;
+    }
+
+    .search-box input::placeholder {
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    /* VIBE PROMPT: Hero Section
+       Build a full-width hero section that occupies at least 30% of the viewport height.
+       Split it vertically into two equal visual areas: one side with bold persuasive copy
+       and CTA buttons, the other side with a steaming Nigerian dish image.
+    */
+    .hero {
+      width: 100%;
+      min-height: 34vh;
+      padding: 46px 0 34px;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(124, 58, 237, 0.16), transparent 30%),
+        radial-gradient(circle at 85% 35%, rgba(37, 99, 235, 0.22), transparent 30%),
+        #ffffff;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.04fr 0.96fr;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      color: var(--blue-900);
+      background: var(--purple-100);
+      font-weight: 900;
+      font-size: 0.84rem;
+      margin-bottom: 18px;
+    }
+
+    .hero-copy h2 {
+      font-size: clamp(2.1rem, 5vw, 4.8rem);
+      line-height: 0.98;
+      color: var(--blue-950);
+      letter-spacing: -0.06em;
+      max-width: 760px;
+    }
+
+    .hero-copy h2 span {
+      color: var(--purple-700);
+    }
+
+    .hero-copy p {
+      max-width: 620px;
+      color: var(--slate-700);
+      margin: 18px 0 26px;
+      font-size: 1.08rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 20px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-primary {
+      color: var(--white);
+      background: linear-gradient(90deg, var(--blue-700), var(--purple-600));
+      box-shadow: 0 15px 28px rgba(37, 99, 235, 0.28);
+    }
+
+    .btn-secondary {
+      color: var(--blue-900);
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero-image-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 32px;
+      background: var(--blue-950);
+      box-shadow: var(--shadow);
+      min-height: 365px;
+    }
+
+    .hero-image-card img {
+      height: 430px;
+      object-fit: cover;
+      opacity: 0.88;
+    }
+
+    .hero-badge {
+      position: absolute;
+      left: 20px;
+      bottom: 20px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--blue-950);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      max-width: 280px;
+    }
+
+    .hero-badge strong {
+      display: block;
+      font-size: 1.05rem;
+    }
+
+    .hero-badge small {
+      color: var(--slate-500);
+      font-weight: 700;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 30px;
+      max-width: 650px;
+    }
+
+    .stat-card {
+      padding: 16px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+    }
+
+    .stat-card strong {
+      display: block;
+      color: var(--blue-900);
+      font-size: 1.45rem;
+      line-height: 1;
+    }
+
+    .stat-card span {
+      color: var(--slate-500);
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+
+    .section {
+      padding: 34px 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: clamp(1.7rem, 3vw, 2.6rem);
+      color: var(--blue-950);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .section-lead {
+      color: var(--slate-700);
+      max-width: 650px;
+      margin-top: 8px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: var(--blue-900);
+      font-weight: 900;
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+
+    /* VIBE PROMPT: Main Section and Side Panel
+       Create a product area with a sticky left-side panel and a responsive product grid.
+       The side panel should connect users to categories and specific products.
+       The grid must show at least three rows with at least four product cards per row on desktop.
+    */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 255px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .side-panel {
+      position: sticky;
+      top: 92px;
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-xl);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .side-panel h3 {
+      color: var(--blue-950);
+      margin-bottom: 12px;
+      font-size: 1.05rem;
+    }
+
+    .side-list {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .side-list a,
+    .side-list button {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      border: 0;
+      border-radius: 12px;
+      padding: 10px 11px;
+      background: var(--slate-100);
+      color: var(--slate-700);
+      font-weight: 800;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.2s ease, color 0.2s ease;
+      font-size: 0.9rem;
+    }
+
+    .side-list a:hover,
+    .side-list button:hover {
+      color: var(--white);
+      background: linear-gradient(90deg, var(--blue-700), var(--purple-600));
+    }
+
+    .mini-note {
+      padding: 14px;
+      border-radius: 16px;
+      color: var(--blue-900);
+      background: linear-gradient(180deg, #eff6ff, #f5f3ff);
+      border: 1px solid #dbeafe;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .product-card {
+      position: relative;
+      overflow: hidden;
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 13px 30px rgba(15, 23, 42, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .product-image {
+      height: 178px;
+      overflow: hidden;
+      background: var(--slate-100);
+    }
+
+    .product-image img {
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
+    }
+
+    .discount {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: var(--white);
+      background: linear-gradient(90deg, var(--purple-700), var(--blue-700));
+      font-weight: 900;
+      font-size: 0.78rem;
+    }
+
+    .product-body {
+      padding: 16px;
+    }
+
+    .product-body h3 {
+      color: var(--blue-950);
+      font-size: 1.04rem;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .quantity {
+      color: var(--slate-500);
+      font-size: 0.88rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .price {
+      color: var(--blue-900);
+      font-size: 1.25rem;
+      font-weight: 900;
+    }
+
+    .old-price {
+      color: var(--slate-500);
+      font-weight: 800;
+      font-size: 0.82rem;
+      text-decoration: line-through;
+    }
+
+    .card-button {
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 12px;
+      color: var(--white);
+      background: var(--blue-900);
+      font-weight: 900;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .card-button:hover {
+      background: var(--purple-700);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .service-card,
+    .support-card,
+    .prompt-card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-xl);
+      padding: 22px;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.07);
+    }
+
+    .service-card h3,
+    .support-card h3,
+    .prompt-card h3 {
+      color: var(--blue-950);
+      margin-bottom: 8px;
+    }
+
+    .service-card p,
+    .support-card p,
+    .prompt-card p {
+      color: var(--slate-700);
+    }
+
+    /* VIBE PROMPT: Prompts Section
+       Display the actual vibe-engineering prompts used for the assignment.
+       Make them visible, readable, and separated by landing-page section.
+    */
+    .prompt-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .prompt-card pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin-top: 10px;
+      color: var(--slate-700);
+      background: #f8fafc;
+      border: 1px solid var(--slate-200);
+      border-radius: 16px;
+      padding: 14px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 0.85rem;
+      line-height: 1.55;
+    }
+
+    .support-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .credit-list {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 18px;
+      color: var(--slate-700);
+      font-size: 0.86rem;
+    }
+
+    .credit-list li {
+      margin-left: 18px;
+    }
+
+    /* VIBE PROMPT: Footer Section
+       Make a sticky footer with social media links, contact details and brand identity.
+       Keep it compact so it remains usable while fixed to the bottom of the page.
+    */
+    .footer {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 45;
+      background: linear-gradient(90deg, var(--blue-950), var(--purple-700));
+      color: var(--white);
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 -12px 32px rgba(8, 22, 77, 0.22);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 68px;
+    }
+
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .socials a {
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      border-radius: 999px;
+      padding: 8px 11px;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 0.85rem;
+      font-weight: 900;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 1020px) {
+      .nav {
+        flex-wrap: wrap;
+        padding: 12px 0;
+      }
+
+      .brand {
+        min-width: 0;
+      }
+
+      .menu {
+        order: 3;
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      .search-box {
+        width: min(330px, 48vw);
+      }
+
+      .hero-grid,
+      .main-layout,
+      .support-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .side-panel {
+        position: relative;
+        top: 0;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding-bottom: 132px;
+      }
+
+      .hero {
+        padding-top: 28px;
+      }
+
+      .hero-grid {
+        gap: 22px;
+      }
+
+      .hero-image-card img {
+        height: 330px;
+      }
+
+      .stats,
+      .prompt-grid,
+      .credit-list {
+        grid-template-columns: 1fr;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .section-header,
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .footer-inner {
+        padding: 12px 0;
+      }
+
+      .search-box {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- MENU SECTION -->
+  <header class="topbar">
+    <nav class="container nav" aria-label="Primary navigation">
+      <a href="#home" class="brand" aria-label="MamaPutOnline home">
+        <div class="logo-mark">MPO</div>
+        <div>
+          <h1>MamaPutOnline</h1>
+          <small>Nigerian meals, ready to go</small>
+        </div>
+      </a>
+
+      <div class="menu" aria-label="Main menu links">
+        <a href="#products">Products</a>
+        <a href="#services">Services</a>
+        <a href="#customer-service">Customer Service</a>
+        <a href="#contact">Contact Us</a>
+        <a href="#prompts">Prompts Used</a>
+      </div>
+
+      <div class="search-box">
+        <label for="searchInput">Search product</label>
+        <input id="searchInput" type="search" placeholder="Search egusi, jollof, abacha..." />
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <main id="home">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Online takeaway for Nigerian cooked meals</span>
+          <h2 id="hero-title">Do not miss hot, fresh <span>Mama Put</span> meals delivered fast.</h2>
+          <p>
+            Order soups, rice dishes, native meals, sides and proteins from one clean online store. Every bowl is packed for convenience, clear pricing and quick takeaway delivery.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#products">Order from the menu</a>
+            <a class="btn btn-secondary" href="#prompts">View prompts used</a>
+          </div>
+
+          <div class="stats" aria-label="Store highlights">
+            <div class="stat-card"><strong>16</strong><span>Prepared dishes</span></div>
+            <div class="stat-card"><strong>25%</strong><span>Maximum discount</span></div>
+            <div class="stat-card"><strong>30 min</strong><span>Average dispatch</span></div>
+          </div>
+        </div>
+
+        <figure class="hero-image-card">
+          <img src="assets/ogbono-soup.jpg" alt="Steaming Nigerian soup cooking in a pot" />
+          <figcaption class="hero-badge">
+            <strong>Fresh soup bowls from ₦2,000</strong>
+            <small>Egusi, Ewedu, Ora, Edikaikong, Okazi, Ogbono and Okro available today.</small>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- MAIN PRODUCT SECTION -->
+    <section id="products" class="section" aria-labelledby="products-title">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2 id="products-title" class="section-title">Today’s product cards</h2>
+            <p class="section-lead">Each card shows the product name, quantity, price in Naira and discount. Use the search bar or side panel to filter the menu.</p>
+          </div>
+          <span class="pill">Blue / white / purple UI</span>
+        </div>
+
+        <div class="main-layout">
+          <aside class="side-panel" aria-label="Product side panel">
+            <h3>Menu Categories</h3>
+            <div class="side-list">
+              <button type="button" data-filter="all">All products <span>16</span></button>
+              <button type="button" data-filter="soup">Soups <span>7</span></button>
+              <button type="button" data-filter="rice">Rice meals <span>2</span></button>
+              <button type="button" data-filter="native">Native meals <span>4</span></button>
+              <button type="button" data-filter="side-protein">Sides & protein <span>3</span></button>
+            </div>
+
+            <h3>Quick Links</h3>
+            <div class="side-list">
+              <a href="#egusi">Egusi Soup <span>›</span></a>
+              <a href="#jollof">Jollof Rice <span>›</span></a>
+              <a href="#abacha">Abacha <span>›</span></a>
+              <a href="#nkwobi">Nkwobi <span>›</span></a>
+              <a href="#kpomo">Peppered Kpomo <span>›</span></a>
+            </div>
+
+            <div class="mini-note">
+              Search and category filters are added with light JavaScript so the page feels interactive without becoming complicated.
+            </div>
+          </aside>
+
+          <div class="products-grid" id="productGrid">
+            <article class="product-card" id="egusi" data-name="egusi soup" data-category="soup">
+              <span class="discount">12% off</span>
+              <div class="product-image"><img src="assets/egusi-soup.jpg" alt="Egusi soup" /></div>
+              <div class="product-body"><h3>Egusi Soup</h3><p class="quantity">1 litre bowl with assorted protein</p><div class="price-row"><span class="price">₦3,500</span><span class="old-price">₦4,000</span></div><button class="card-button">Add to tray</button></div>
+            </article>
+
+            <article class="product-card" id="ewedu" data-name="ewedu soup" data-category="soup">
+              <span class="discount">10% off</span>
+              <div class="product-image"><img src="assets/ewedu-soup.jpg" alt="Ewedu soup with stew" /></div>
+              <div class="product-body"><h3>Ewedu Soup</h3><p class="quantity">750ml bowl with stew option</p><div class="price-row"><span class="price">₦2,000</span><span class="old-price">₦2,200</span></div><button class="card-button">Add to tray</button></div>
+            </article>
+
+            <article class="product-card" id="ora" data-name="ora soup oha soup" data-category="soup">
+              <span class="discount">15% off</span>
+              <div class="product-image"><img src="assets/ora-soup.jpg" alt="Ora or Oha soup" /></div>
+              <div class="product-body"><h3>Ora Soup</h3><p class="quantity">1 litre bowl, rich native mix</p><div class="price-row"><span class="price">₦4,000</span><span class="old-price">₦4,700</span></div><button class="card-button">Add to tray</button></div>
+            </article>
+
+            <article class="product-card" id="edikaikong" data-name="edikaikong soup" data-category="soup">
+              <span class="discount">18% off</span>
+              <div class="product-image"><img src="assets/edikaikong-soup.jpg" alt="Edikaikong soup" /></div>
+              <div class="product-body"><h3>Edikaikong Soup</h3><p class="quantity">1 litre vegetable soup bowl</p><div class="price-row"><span class="price">₦4,500</span><span class="old-price">₦5,500</span></div><button class="card-button">Add to tray</button></div>
+            </article>
+
+            <article class="product-card" id="okazi" data-name="okazi soup" data-category="soup">
+              <span class="discount">14% off</span>
+              <div class="product-image"><img src="assets/okazi-soup.jpg" alt="Okazi soup" /></div>
+              <div class="product-body"><h3>Okazi Soup</h3><p class="quantity">1 litre bowl with mixed meat</p><div class="price-row"><span class="price">₦3,800</span><span class="old-price">₦4,400</span></div><button class="card-button">Add to tray</button></div>
+            </article>
+
+            <article class="product-card" id="ogbono" data-name="ogbono soup" data-category="soup">
+              <span class="discount">13% off</span>
+              <div class="product-image"><img src="assets/ogbono-soup.jpg" alt="Ogbono soup" /></div>
+              <div class="product-body"><h3>Ogbono Soup</h3><p class="quantity">1 litre draw soup bowl</p><div class="price-row"><span class="price">₦3,700</span><span class="old-price">₦4,250</span></div><button class="card-button">Add to tray</button></div>
+            </article>
+
+            <article class="product-card" id="okro" data-name="okro soup okra soup" data-category="soup">
+              <span class="discount">10% off</span>
+              <div class="product-image"><img src="assets/okro-soup.jpg" alt="Okro soup" /></div>
+              <div class="product-body"><h3>Okro Soup</h3><p class="quantity">1 litre bowl with beef pieces</p><div class="price-row"><span class="price">₦3,200</span><span class="old-price">₦3,550</span></div><button class="card-button">Add to tray</button></div>
+            </article>
+
+            <article class="product-card" id="jollof" data-name="jollof rice chicken" data-category="rice">
+              <span class="discount">20% off</span>
+              <div class="product-image"><img src="assets/jollof-rice.jpg" alt="Jollof rice with chicken" /></div>
+              <div class="product-body"><h3>Jollof Rice</h3><p class="quantity">1 takeaway plate with chicken</p><div class="price-row"><span class="price">₦2,500</span><span class="old-price">₦3,100</span></div><button class="card-button">Add to tray</button></div>
+            </article>
+
+            <article class="product-card" id="fried-rice" data-name="fried rice chicken" data-category="rice">
+              <span class="discount">18% off</span>
+              <div class="product-image"><img src="assets/fried-rice.jpg" alt="Fried rice and chicken packs" /></div>
+              <div class="product-body"><h3>Fried Rice</h3><p class="quantity">1 takeaway plate with chicken</p><div class="price-row"><span class="price">₦2,800</span><span class="old-price">₦3,400</span></div><button class="card-button">Add to tray</button></div>
+            </article>
+
+            <article class="product-card" id="yam-porridge" data-name="porridge yam yam pottage asaro" data-category="native">
+              <span class="discount">15% off</span>
+              <div class="product-image"><img src="assets/yam-porridge.jpg" alt="Porridge yam" /></div>
+              <div class="product-body"><h3>Porridge Yam</h3><p class="quantity">1 medium plate with plantain</p><div class="price-row"><span class="price">₦2,700</span><span class="old-price">₦3,200</span></div><button class="card-button">Add to tray</button></div>
+            </article>
+
+            <article class="product-card" id="beans" data-name="porridge beans beans plantain" data-category="native">
+              <span class="discount">12% off</span>
+              <div class="product-image"><img src="assets/beans-porridge.jpg" alt="Beans porridge with fried plantain" /></div>
+              <div class="product-body"><h3>Porridge Beans</h3><p class="quantity">1 bowl with fried plantain</p><div class="price-row"><span class="price">₦2,300</span><span class="old-price">₦2,600</span></div><button class="card-button">Add to tray</button></div>
+            </article>
+
+            <article class="product-card" id="plantain" data-name="fried plantain dodo" data-category="side-protein">
+              <span class="discount">8% off</span>
+              <div class="product-image"><img src="assets/fried-plantain.jpg" alt="Fried plantain" /></div>
+              <div class="product-body"><h3>Fried Plantain</h3><p class="quantity">1 side pack, golden pieces</p><div class="price-row"><span class="price">₦1,200</span><span class="old-price">₦1,300</span></div><button class="card-button">Add to tray</button></div>
+            </article>
+
+            <article class="product-card" id="abacha" data-name="abacha african salad" data-category="native">
+              <span class="discount">11% off</span>
+              <div class="product-image"><img src="assets/abacha.jpg" alt="Abacha African salad" /></div>
+              <div class="product-body"><h3>Abacha</h3><p class="quantity">1 plate with garden egg mix</p><div class="price-row"><span class="price">₦2,500</span><span class="old-price">₦2,800</span></div><button class="card-button">Add to tray</button></div>
+            </article>
+
+            <article class="product-card" id="nkwobi" data-name="nkwobi cow foot" data-category="native">
+              <span class="discount">15% off</span>
+              <div class="product-image"><img src="assets/nkwobi.jpg" alt="Nkwobi in a wooden bowl" /></div>
+              <div class="product-body"><h3>Nkwobi</h3><p class="quantity">1 native bowl, spicy cow foot</p><div class="price-row"><span class="price">₦4,000</span><span class="old-price">₦4,700</span></div><button class="card-button">Add to tray</button></div>
+            </article>
+
+            <article class="product-card" id="fried-chicken" data-name="fried chicken" data-category="side-protein">
+              <span class="discount">10% off</span>
+              <div class="product-image"><img src="assets/fried-chicken.jpg" alt="Fried chicken with rice" /></div>
+              <div class="product-body"><h3>Fried Chicken</h3><p class="quantity">2 pieces, peppered option</p><div class="price-row"><span class="price">₦2,000</span><span class="old-price">₦2,200</span></div><button class="card-button">Add to tray</button></div>
+            </article>
+
+            <article class="product-card" id="kpomo" data-name="kpomo ponmo peppered cow skin" data-category="side-protein">
+              <span class="discount">17% off</span>
+              <div class="product-image"><img src="assets/kpomo.jpg" alt="Peppered kpomo" /></div>
+              <div class="product-body"><h3>Peppered Kpomo</h3><p class="quantity">1 bowl, spicy cow skin cuts</p><div class="price-row"><span class="price">₦2,500</span><span class="old-price">₦3,000</span></div><button class="card-button">Add to tray</button></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="section" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2 id="services-title" class="section-title">Services</h2>
+            <p class="section-lead">The landing page is designed for takeaway ordering, quick browsing and simple customer support.</p>
+          </div>
+        </div>
+        <div class="services-grid">
+          <div class="service-card"><h3>Online ordering</h3><p>Customers can browse meals, check quantity, compare prices and add items to their tray.</p></div>
+          <div class="service-card"><h3>Takeaway packaging</h3><p>Soups and meals are presented as litre bowls, takeaway plates and side packs for clear ordering.</p></div>
+          <div class="service-card"><h3>Fast dispatch</h3><p>The page communicates speed, fresh preparation and a direct call to action for orders.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CUSTOMER SERVICE AND CONTACT SECTION -->
+    <section id="customer-service" class="section" aria-labelledby="support-title">
+      <div class="container support-wrap">
+        <div class="support-card">
+          <h2 id="support-title" class="section-title">Customer Service</h2>
+          <p>Need help with orders, delivery timing, food allergies or bulk soup bowls? MamaPutOnline support is available from 8:00am to 9:00pm daily.</p>
+        </div>
+        <div id="contact" class="support-card">
+          <h2 class="section-title">Contact Us</h2>
+          <p><strong>Phone:</strong> +234 800 000 0000</p>
+          <p><strong>Email:</strong> orders@mamaputonline.ng</p>
+          <p><strong>Address:</strong> Enugu, Lagos and nationwide takeaway dispatch partners.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROMPTS USED SECTION -->
+    <section id="prompts" class="section" aria-labelledby="prompts-title">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2 id="prompts-title" class="section-title">Prompts used per section</h2>
+            <p class="section-lead">These are the vibe-engineering prompts used to shape the page structure, colour direction, layout and interaction.</p>
+          </div>
+          <span class="pill">Visible assignment evidence</span>
+        </div>
+
+        <div class="prompt-grid">
+          <div class="prompt-card">
+            <h3>Overall UI / UX Prompt</h3>
+            <pre>Design a clean landing page for MamaPutOnline, an online takeaway Nigerian cooked meal restaurant. Use a blue, white and purple colour system, strong visual hierarchy, readable product cards, and a simple layout that feels modern but still Nigerian-food focused.</pre>
+          </div>
+
+          <div class="prompt-card">
+            <h3>Menu Prompt</h3>
+            <pre>Create a sticky top menu with the MamaPutOnline logo on the top-left, navigation links for Products, Services, Customer Service and Contact Us, and a search input on the top-right. Use a dark blue/purple gradient and clear hover states.</pre>
+          </div>
+
+          <div class="prompt-card">
+            <h3>Hero Prompt</h3>
+            <pre>Create a hero section that occupies at least 30% of the vertical page height and 100% of the page width. Split it into two columns: one column should contain bold persuasive text and call-to-action buttons; the other should show a steaming Nigerian soup image with correct aspect ratio and sharp display.</pre>
+          </div>
+
+          <div class="prompt-card">
+            <h3>Main/Product Card Prompt</h3>
+            <pre>Create a main section with a sticky side panel on the left and product cards on the right. The side panel should link to food categories and specific dishes. The product grid should have at least three rows and four cards per row on desktop. Each card should show image, product name, quantity, price in Naira and discount.</pre>
+          </div>
+
+          <div class="prompt-card">
+            <h3>Image Sourcing Prompt</h3>
+            <pre>Find online images of Nigerian prepared foods such as egusi, ewedu, ora/oha, edikaikong, okazi, ogbono, okro, jollof rice, fried rice, porridge yam, beans, plantain, abacha, nkwobi, fried chicken and kpomo. Download them locally, resize them for web use, and use them inside product cards.</pre>
+          </div>
+
+          <div class="prompt-card">
+            <h3>Footer Prompt</h3>
+            <pre>Create a sticky footer with social media links, basic contact identity and a compact layout. Keep it in the same blue/purple brand style and make sure it stays visible at the bottom of the screen.</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMAGE CREDIT SECTION -->
+    <section class="section" aria-labelledby="credits-title">
+      <div class="container support-card">
+        <h2 id="credits-title" class="section-title">Image credits</h2>
+        <p>Food images were downloaded from Wikimedia Commons pages and resized locally for this assignment. Replace with your own restaurant photos before real commercial launch.</p>
+        <ul class="credit-list">
+          <li>Egusi soup — Tesleemah, Wikimedia Commons.</li>
+          <li>Jollof rice — Ei'eke, Wikimedia Commons.</li>
+          <li>Ewedu soup — Bukky658, Wikimedia Commons.</li>
+          <li>Ora/Oha soup — Akwugo, Wikimedia Commons.</li>
+          <li>Edikaikong soup — Zaracooks, Wikimedia Commons.</li>
+          <li>Okazi soup — Osaefe, Wikimedia Commons.</li>
+          <li>Ogbono soup — Sasu photography, Wikimedia Commons.</li>
+          <li>Okro soup — Sumit Surai, Wikimedia Commons.</li>
+          <li>Yam porridge — Kojodavid, Wikimedia Commons.</li>
+          <li>Beans porridge — Bukky658, Wikimedia Commons.</li>
+          <li>Abacha — Akum20, Wikimedia Commons.</li>
+          <li>Nkwobi — Bukky658, Wikimedia Commons.</li>
+          <li>Fried plantain — Fatimah Bello, Wikimedia Commons.</li>
+          <li>Kpomo — Akum20, Wikimedia Commons.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER SECTION -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <strong>MamaPutOnline — hot Nigerian takeaway meals</strong>
+      <div class="socials" aria-label="Social media links">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">TikTok</a>
+        <a href="#">X / Twitter</a>
+        <a href="#">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /*
+      Small interaction script:
+      1. Search field filters product cards by dish name.
+      2. Side panel category buttons filter product cards by category.
+      This keeps the landing page interactive while staying simple for an HTML/CSS assignment.
+    */
+    const searchInput = document.getElementById('searchInput');
+    const products = Array.from(document.querySelectorAll('.product-card'));
+    const filterButtons = Array.from(document.querySelectorAll('[data-filter]'));
+
+    function filterProducts(category = 'all') {
+      const searchTerm = searchInput.value.trim().toLowerCase();
+
+      products.forEach((card) => {
+        const name = card.dataset.name.toLowerCase();
+        const cardCategory = card.dataset.category;
+        const categoryMatch = category === 'all' || cardCategory === category;
+        const searchMatch = !searchTerm || name.includes(searchTerm);
+
+        card.classList.toggle('hidden', !(categoryMatch && searchMatch));
+      });
+    }
+
+    searchInput.addEventListener('input', () => filterProducts('all'));
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        filterProducts(button.dataset.filter);
+      });
+    });
+  </script>
+</body>
+</html>
